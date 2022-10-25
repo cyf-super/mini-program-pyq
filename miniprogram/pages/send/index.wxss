@@ -1,0 +1,52 @@
+/* pages/send/index.wxss */
+.send {
+    display: flex;
+    justify-content: center;
+    /* align-items: center; */
+    flex-direction: column;
+    padding: 30rpx;
+}
+.text-section .textarea {
+    display: inline-block;
+    width: 100%;
+    height: 200rpx;
+}
+.img-section {
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 20rpx;
+    margin-bottom: 50rpx;
+}
+
+.image-item {
+    width: 210rpx;
+    height: 210rpx;
+    background-color: rgb(224, 224, 224);
+    margin-right: 15rpx;
+    margin-bottom: 15rpx;
+}
+.update-Img {
+    width: 210rpx;
+    height: 210rpx;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    font-size: 200rpx;
+    font-weight: 10;
+    color: #818181;
+    background-color: rgb(224, 224, 224);
+}
+
+.btn-section {
+    display: flex;
+}
+.send-btn, .clear-all {
+    height: 70rpx;
+    max-width: 250rpx;
+    line-height: 35rpx;
+    background-color: #0e932e;
+    color: white;
+    font-weight: 100;
+    font-size: 35rpx;
+}

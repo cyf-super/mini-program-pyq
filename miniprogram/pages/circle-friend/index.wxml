@@ -1,0 +1,4 @@
+<!--pages/circle-friend/index.wxml-->
+<view>
+    <button bindtap="editCircleFriend">朋友圈</button>
+</view>

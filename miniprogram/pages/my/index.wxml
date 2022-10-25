@@ -1,0 +1,18 @@
+<!--pages/my/index.wxml-->
+<!-- header -->
+<view class="login" >
+    <view class="login_bg"></view>
+    <view class="login-head" wx:if="{{!isLogin}}" bindtap="login">
+        <view class="head-img">
+            <image class="login-img" src="https://caiyf.oss-cn-shenzhen.aliyuncs.com/cyf/non-mainstream/login.jpg"></image>
+        </view>
+        <view class="login-name">点击登录</view>
+    </view>
+    <view class="login-head" wx:if="{{ isLogin }}">
+        <view class="head-img">
+        <image class="login-img" src="{{userInfo.avatarUrl}}"></image>
+        </view>
+        <view class="login-name">{{ userInfo.name }}</view>
+    </view>
+
+</view>

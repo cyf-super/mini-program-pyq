@@ -1,0 +1,40 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/circle-friend/index",
+    "pages/my/index",
+    "pages/send/index"
+  ],
+  "window": {
+    "backgroundColor": "#F6F6F6",
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#0e932e",
+    "navigationBarTitleText": "非主流小分队",
+    "navigationBarTextStyle": "black"
+  },
+  "tabBar": {
+    "selectedColor": "#0e932e",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "text": "首页",
+        "iconPath": "static/tab_icons/home.png",
+        "selectedIconPath": "static/tab_icons/home-active.png"
+      },
+      {
+        "pagePath": "pages/circle-friend/index",
+        "text": "朋友圈",
+        "iconPath": "static/tab_icons/message.png",
+        "selectedIconPath": "static/tab_icons/message-active.png"
+      },
+      {
+        "pagePath": "pages/my/index",
+        "text": "个人",
+        "iconPath": "static/tab_icons/my.png",
+        "selectedIconPath": "static/tab_icons/my-active.png"
+      }
+    ]
+  },
+  "sitemapLocation": "sitemap.json",
+  "style": "v2"
+}

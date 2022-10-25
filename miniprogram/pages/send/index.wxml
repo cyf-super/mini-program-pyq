@@ -1,0 +1,14 @@
+<!--pages/send/index.wxml-->
+<view class="send">
+    <view class="text-section">
+        <textarea class="textarea" auto-focus auto-height placeholder="自动变高" bindblur="bindTextAreaBlur" />
+    </view>
+    <view class="img-section">
+        <image class="image-item" wx:for="{{imgArr}}" src="{{item.tempFilePath}}" wx:key="id"></image>
+        <view wx:if="{{ imgArr.length < 9}}" class="update-Img" bindtap="updateImg">+</view>
+    </view>
+    <view class="btn-section">
+        <button class="send-btn" bindtap="sendBtn">发表</button>
+        <button class="clear-all" bindtap="clearAll">清空全部</button>
+    </view>
+</view>
