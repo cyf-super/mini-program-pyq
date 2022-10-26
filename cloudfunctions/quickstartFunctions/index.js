@@ -1,6 +1,7 @@
 const login = require('./login/index');
 const userInfo = require('./setUserInfo/index');
 const uploadFile = require('./uploadFile/index');
+const sendBlog = require('./sendBlog/index');
 
 // 云函数入口函数
 exports.main = async (event, context) => {
@@ -11,5 +12,7 @@ exports.main = async (event, context) => {
         return await userInfo.main(event, context);
     case 'uploadFile':
         return await uploadFile.main(event, context);
+    case 'sendBlog':
+        return await sendBlog.main(event, context);
   }
 };

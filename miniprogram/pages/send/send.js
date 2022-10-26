@@ -38,7 +38,7 @@ Page({
     })
   },
 
-  sendBtn() {
+  sendBlog() {
     if (!this.data.content && !this.data.imgArr.length) {
         wx.showToast({
             title: '好歹说两句嘛',
@@ -46,19 +46,50 @@ Page({
         })
         return
     }
+    wx.showLoading({
+        title: '发表中...',
+        mask: true
+    })
 
+    const uploadAsyncQueue = []
     for (let image of this.data.imgArr) {
-        this.uploadImg(image.tempFilePath)
+        uploadAsyncQueue.push(this.uploadImg(image.tempFilePath))
     }
+    Promise.all(uploadAsyncQueue).then(res => {
+        console.log('上传完成---> ', res);
+        wx.cloud.callFunction({
+            name: 'quickstartFunctions',
+            data: {
+                type: 'sendBlog',
+                content: this.data.content,
+                images: res
+            }
+        }).then(_res => {
+            wx.hideLoading()
+            wx.navigateTo({
+                url: '../blog/blog',
+            })
+            this.setData({
+                content: '',
+                images: []
+            })
+        }).catch(_err => {
+            console.log('发表失败');
+        }) 
+    })
   },
 
-  uploadImg: async function (tempFilePath) {
-    try {
-      const res = await uploadImage(tempFilePath, 'non-mainstream/friend-circle/')    
-      console.log('上传成功---》 ', res);
-    } catch (error) {
-      console.log('上传失败---》 ', error);
-    }
+  uploadImg (tempFilePath) {
+    return new Promise(async (resolve, rejetc) => {
+        try {
+            const res = await uploadImage(tempFilePath, 'non-mainstream/friend-circle/')    
+            console.log('上传成功---> ', res);
+            resolve({tempFilePath :res})
+        } catch (err) {
+            console.log('上传失败---> ', err);
+            rejetc(err)
+        }
+    })
 
     // wx.cloud.uploadFile({
     //     cloudPath: cloudPath,

@@ -1,17 +1,19 @@
-// pages/circle-friend/index.js
+// pages/blog/blog.js
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-
+    userInfo: {
+        name: 'zxc',
+        img: 'https://caiyf.oss-cn-shenzhen.aliyuncs.com/non-mainstream/login.jpg'
+    }
   },
 
   editCircleFriend() {
-      console.log(123);
       wx.navigateTo({
-        url: '../send/index',
+        url: '../send/send',
       })
   },
 

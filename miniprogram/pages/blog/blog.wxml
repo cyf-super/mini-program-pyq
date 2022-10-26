@@ -1,0 +1,14 @@
+<!--pages/blog/blog.wxml-->
+<view class="blog">
+    <view class="blog-backgroud">
+        <view>
+        <button bindtap="editCircleFriend" class="btn sendBtn" size='mini'>发表</button>
+        </view>
+        <image class="blog-img" mode="widthFix" src="https://caiyf.oss-cn-shenzhen.aliyuncs.com/non-mainstream/backgroud.jpg"></image>
+        <view class="person">
+            <text class="person-name">{{ userInfo.name }}</text>
+            <image class="person-logo" src="{{ userInfo.img }}"  ></image>
+        </view>
+    </view>
+
+</view>

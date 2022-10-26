@@ -1,9 +1,9 @@
 {
   "pages": [
     "pages/index/index",
-    "pages/circle-friend/index",
-    "pages/my/index",
-    "pages/send/index"
+    "pages/blog/blog",
+    "pages/my/my",
+    "pages/send/send"
   ],
   "window": {
     "backgroundColor": "#F6F6F6",
@@ -22,13 +22,13 @@
         "selectedIconPath": "static/tab_icons/home-active.png"
       },
       {
-        "pagePath": "pages/circle-friend/index",
+        "pagePath": "pages/blog/blog",
         "text": "朋友圈",
         "iconPath": "static/tab_icons/message.png",
         "selectedIconPath": "static/tab_icons/message-active.png"
       },
       {
-        "pagePath": "pages/my/index",
+        "pagePath": "pages/my/my",
         "text": "个人",
         "iconPath": "static/tab_icons/my.png",
         "selectedIconPath": "static/tab_icons/my-active.png"

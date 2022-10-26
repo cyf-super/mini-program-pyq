@@ -50,3 +50,8 @@
     font-weight: 100;
     font-size: 35rpx;
 }
+
+.hover-class {
+    scale: 1.2;
+    transition: scale 1.5s;
+}

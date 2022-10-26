@@ -61,7 +61,7 @@
         },
         {
           "name": "",
-          "pathName": "pages/circle-friend/index",
+          "pathName": "pages/blog/blog",
           "query": "",
           "launchMode": "default",
           "scene": null

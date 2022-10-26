@@ -1,0 +1,35 @@
+/* pages/blog/blog.wxss */
+.blog-backgroud {
+    position: relative;
+}
+
+.sendBtn {
+    position: absolute;
+    left: 20rpx;
+    top: 15rpx;
+}
+
+.person {
+    position: absolute;
+    right: 60rpx;
+    bottom: -40rpx;
+    display: flex;
+}
+
+.person-name {
+    margin-right: 20rpx;
+    margin-top: 25rpx;
+    color: #fff;
+}
+
+.person-logo {
+    width: 130rpx;
+    height: 130rpx;
+    border-radius: 15rpx;
+}
+
+.btn{
+    background-color: #0e932e;
+    color: white;
+    font-weight: 100;
+}
