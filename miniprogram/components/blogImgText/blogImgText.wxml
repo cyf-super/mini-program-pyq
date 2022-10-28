@@ -1,0 +1,17 @@
+<!--components/blogImgText/blogImgText.wxml-->
+<view class="blog-section">
+    <view class="blog-left">
+        <image class="person-img" src="{{userInfo.img}}"></image>
+    </view>
+    <view class="blog-right">
+        <view class="blog-name">
+            <text>{{ userInfo.name }}</text>
+        </view>
+        <view class="blog-content">
+            {{ blog.content }}
+        </view>
+        <view class="img-grid">
+            <image mode='widthFix' class="img-item {{ blog.images.length === 4 ?'img-item-four' : '' }}"  wx:for="{{blog.images}}" wx:key="id" src="{{item}}"></image>
+        </view>
+    </view>
+</view>

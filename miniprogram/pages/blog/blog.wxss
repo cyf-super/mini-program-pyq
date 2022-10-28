@@ -3,6 +3,10 @@
     position: relative;
 }
 
+.blog-img {
+    width: 100%;
+}
+
 .sendBtn {
     position: absolute;
     left: 20rpx;
@@ -11,15 +15,16 @@
 
 .person {
     position: absolute;
-    right: 60rpx;
+    right: 30rpx;
     bottom: -40rpx;
     display: flex;
 }
 
 .person-name {
     margin-right: 20rpx;
-    margin-top: 25rpx;
+    margin-top: 20rpx;
     color: #fff;
+    font-size: 42rpx;
 }
 
 .person-logo {
@@ -32,4 +37,9 @@
     background-color: #0e932e;
     color: white;
     font-weight: 100;
+}
+
+.blog-container {
+    margin: 150rpx 30rpx;
+    word-wrap: break-word;
 }

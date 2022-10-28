@@ -10,5 +10,7 @@
             <image class="person-logo" src="{{ userInfo.img }}"  ></image>
         </view>
     </view>
-
+    <view class="blog-container">
+        <blogImgText></blogImgText>
+    </view>
 </view>
