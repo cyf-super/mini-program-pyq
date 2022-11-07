@@ -1,0 +1,53 @@
+<!--components/comment/comment.wxml-->
+<!-- <wxs src="./comment.wxs" module="m1"></wxs> -->
+<view class="blog-info">
+    <view class="blog-time">{{blogDate}}</view>
+    <!-- 点赞、评论 -->
+    <view class="blog-handle">
+        <view class="mask" wx:if="{{isShowMask}}">
+            <view class="mask-item" bindtap="clickStar">
+                <image class="icon" mode="widthFix" src="../../static/icons/heart.svg"></image>
+                <text class="mask-text">赞</text>
+            </view>
+            <view class="mask-item" bindtap="clickComment">
+                <image class="icon" mode="widthFix" src="../../static/icons/comment.svg"></image>
+                <text class="mask-text">评论</text>
+            </view>
+        </view>
+        <view class="omit" bindtap="showMask">••</view>
+    </view>
+</view>
+
+<!-- 点赞、评论详情 -->
+<view class="blog-comment" wx:if="{{starName.length || blogCommentArr.length}}" >
+    <!-- 点赞 -->
+    <view class="star" wx:if="{{starName.length}}">
+        <image mode="widthFix" class="icon" src="../../static/icons/heart-green.svg"></image>
+        <view class="star-name" wx:for="{{starName}}" wx:key="id" wx:for-item="openId">
+            {{ openId }}
+        </view>
+    </view>
+
+    <!-- 评论 -->
+    <view class="comment" wx:if="{{blogCommentArr.length}}">
+        <view class="comment-item" wx:for="{{ blogCommentArr }}" wx:key="id">
+            <view class="name-item">
+                <view wx:if="{{ item.targetName }}">
+                    <text class="name">{{ item.openName }}</text> 回复 <text class="name">{{ item.targetName }}</text>：
+                </view>
+                <view wx:else>
+                    <text class="name">{{ item.openName }}</text>：
+                </view>
+            </view>
+            <view
+                bindtap="replyComment" 
+                bindlongpress="handleComment"
+                data-comment-id="{{ item.commentId }}"
+                data-target-id="{{ item.targetId }}"
+                data-target-name="{{ item.targetName }}"
+                data-open-id="{{ item.openId }}"
+                >
+                {{ item.message }}</view>
+        </view>
+    </view>
+</view>

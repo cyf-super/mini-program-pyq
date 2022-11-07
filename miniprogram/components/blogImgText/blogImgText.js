@@ -11,7 +11,7 @@ Component({
             img: 'https://caiyf.oss-cn-shenzhen.aliyuncs.com/non-mainstream/login.jpg'
         }
     },
-    blog: {
+    blogInfo: {
         type: Object,
         value: {
             content: `
@@ -35,6 +35,20 @@ Component({
    * 组件的方法列表
    */
   methods: {
+    handleBlog(e) {
+        const { commentId, openId, targetId, targetName } = e.currentTarget.dataset
+        const { x, y } = e.detail
+        // if (openId === this.data.openId) return
 
+        const detail = {
+            _id: this.properties.blogInfo._id,
+            offset: {
+                x,
+                y
+            }
+        }
+        console.log(1111, detail);
+        this.triggerEvent('handleBlog', detail)
+    }
   }
 })

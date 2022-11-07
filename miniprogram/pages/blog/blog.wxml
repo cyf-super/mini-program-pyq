@@ -2,7 +2,7 @@
 <view class="blog">
     <view class="blog-backgroud">
         <view>
-        <button bindtap="editCircleFriend" class="btn sendBtn" size='mini'>发表</button>
+            <button bindtap="editCircleFriend" class="btn sendBtn" size='mini'>发表</button>
         </view>
         <image class="blog-img" mode="widthFix" src="https://caiyf.oss-cn-shenzhen.aliyuncs.com/non-mainstream/backgroud.jpg"></image>
         <view class="person">
@@ -11,6 +11,39 @@
         </view>
     </view>
     <view class="blog-container">
-        <blogImgText></blogImgText>
+        <view class="blog-item" wx:for="{{ blogArr }}" wx:key="id">
+            <blogImgText 
+                blog-info="{{item}}"
+                bind:handleBlog="handleBlog">
+            </blogImgText>
+            <comment 
+                blog-comment="{{item.comment}}"
+                blog-time="{{item.timer}}" 
+                blog-stars="{{item.stars}}" 
+                _id="{{item._id}}"
+                bind:clickComment="addComment"
+                bind:clickStar="clickStar"
+                bind:replyComment="replyComment"
+                bind:handleComment="handleComment"
+                >
+            </comment>
+        </view>
+    </view>
+    
+    <view class="input-section disabled"  wx:if="{{showInput}}">
+        <input
+            type="text" placeholder="{{placeholder}}" focus="auto"  
+            class="input_input" value="{{inputMessage}}" 
+            bindinput='bindInputMsg' bindblur="onHideInput" confirm-type="send" bindconfirm="sendTextMsg" />
+
+        <view style="height:110rpx; width:170rpx; display:flex; align-items: center; justify-content: center;">
+            <view class="send_btn" bindtap="sendTextMsg">
+                <text class="send_btn_text">发送</text>
+            </view>
+        </view>
+    </view>
+    
+    <view class="del-comment" style="{{style}}" wx:if="{{ deleteInfo.showDelete }}" bindtap="deleteComment">
+        <view>删除</view>
     </view>
 </view>

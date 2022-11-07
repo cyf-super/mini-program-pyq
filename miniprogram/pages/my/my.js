@@ -1,4 +1,7 @@
 // pages/my/index.js
+import{ createStoreBindings }from'mobx-miniprogram-bindings'
+import { store } from '../../store/store'
+
 Page({
 
   /**
@@ -12,6 +15,18 @@ Page({
         openId: ''
     }
   },
+
+  getStorageInfo() {
+    const userInfo = wx.getStorageSync('userInfo')
+    if (!userInfo) return
+    this.setData({
+        'userInfo.name': userInfo.nickName,
+        'userInfo.avatarUrl': userInfo.avatarUrl,
+        'userInfo.openId': wx.getStorageSync('openId'),
+        isLogin: true
+    })
+  },
+
   login(e) {
       wx.getUserProfile({
         desc: '用户完善会员资料',
@@ -39,6 +54,8 @@ Page({
                 openId: curUser.result.openId
             }
             this.setUserInfo(user)
+            // 存储到store中
+            this.updateOpenName(curUser.result.openId, res.userInfo.nickName)
         })
     })
   },
@@ -87,7 +104,13 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad(options) {
-    // this.setUserInfo()
+    this.getStorageInfo()
+
+    this.storeBindings = createStoreBindings(this, {
+        store,
+        fields: ['openName'],
+        actions: ['updateOpenName']
+    })
   },
 
   /**
@@ -115,7 +138,7 @@ Page({
    * 生命周期函数--监听页面卸载
    */
   onUnload() {
-
+    this.storeBindings.destroyStoreBindings()
   },
 
   /**

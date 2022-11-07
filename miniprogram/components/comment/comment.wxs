@@ -1,0 +1,10 @@
+var foo = "'hello world' from tools.wxs";
+function getOpenName (w, ins) {
+    console.log('event==> ', e, ins);
+    // ins.callMethod('getOpenName1')
+    return 'zxc'
+}
+module.exports = {
+  FOO: foo,
+  getOpenName: getOpenName,
+};

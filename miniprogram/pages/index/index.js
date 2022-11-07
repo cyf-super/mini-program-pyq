@@ -1,4 +1,7 @@
 // pages/index/index.js
+import { createStoreBindings } from 'mobx-miniprogram-bindings'
+import { store } from '../../store/store'
+
 Page({
 
   /**
@@ -8,11 +11,31 @@ Page({
 
   },
 
+  getAllUserInfo: async function() {
+    const users = await wx.cloud.callFunction({
+        name: 'quickstartFunctions',
+        data: {
+            type: 'getAllUser'
+        }
+    })
+    users.result.forEach(user => {
+        this.buttonTap(user.openId, user.userName)
+    })
+  },
+
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad(options) {
+    this.storeBindings = createStoreBindings(this, {
+        store,
+        fields: ['openName'],
+        actions: {
+            buttonTap: "updateOpenName", 
+        }
+    });
 
+    this.getAllUserInfo()
   },
 
   /**

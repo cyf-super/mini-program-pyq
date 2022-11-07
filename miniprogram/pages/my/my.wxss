@@ -1,8 +1,4 @@
 /* pages/my/index.wxss */
-.login {
-    /* height: 150rpx; */
-}
-
 .login_bg {
     width: 100%;
     height: 250rpx;

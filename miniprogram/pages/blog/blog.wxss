@@ -1,4 +1,8 @@
 /* pages/blog/blog.wxss */
+.blog {
+    background-color: var(--background-color);
+}
+
 .blog-backgroud {
     position: relative;
 }
@@ -42,4 +46,73 @@
 .blog-container {
     margin: 150rpx 30rpx;
     word-wrap: break-word;
+}
+
+.blog-item {
+    padding-bottom: 30rpx;
+    margin-bottom: 50rpx;
+    border-bottom: 4rpx solid #F7F7F7;
+}
+
+.input-section {
+    height: 90rpx;
+    display: flex;
+    align-items: center;
+    position: sticky;
+    bottom: 0rpx;
+    left: 0rpx;
+    right: 0rpx;
+    z-index: 500;
+    /* margin: 0 -30rpx 10rpx -30rpx; */
+    margin-bottom: 30rpx;
+    padding: 10rpx;
+    padding-bottom: 30rpx;
+    background: var(--background-gray);
+    border-top: 3rpx solid #f1f1f1;
+}
+ 
+.input_input {
+    background: #fff;
+    /* margin-top: 12rpx; */
+    z-index: 500;
+    width: 580rpx;
+    height: 70rpx;
+    border-radius: 10rpx;
+    padding-left: 15rpx;
+}
+ 
+.send_btn {
+    width: 120rpx;
+    height: 70rpx;
+    position: absolute;
+    top: 24rpx;
+    right: 30rpx;
+    background: var(--theme-color);
+    z-index: 550;
+    border-radius: 10rpx;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+ 
+.send_btn_text {
+    display: flex;
+    font-size: 32rpx;
+    font-family: 'PingFang';
+    color: #fff;
+    z-index: 560;
+}
+
+.del-comment {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 110rpx;
+    height: 70rpx;
+    font-size: 30rpx;
+    border-radius: 10rpx;
+    position: absolute;
+    left: var(--left);
+    top: var(--top);
+    background-color: var(--backgroundColor);
 }

@@ -9,6 +9,10 @@ const db = cloud.database()
 exports.main = async (event, context) => {
     console.log('event===> ', event);
     try {
+        const res = await db.collection('users').where({
+            openId: event.openId
+        }).get()
+        if (res.data.length) return res
         await db.collection('users').add({
             data: {
                 openId: event.openId,

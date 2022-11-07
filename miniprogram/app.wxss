@@ -1,6 +1,8 @@
 /**app.wxss**/
 page {
-    --theme-color: #0e932e
+    --theme-color: #0e932e;
+    --background-color: #fff;
+    --background-gray: #F7F7F7;
 }
 
 .container {

@@ -29,7 +29,7 @@ Page({
         success: (res) => {
             console.log('res---> ', res);
             this.setData({
-                imgArr: res.tempFiles
+                imgArr: [...this.data.imgArr, ...res.tempFiles]
             })
         },
         fail(e) {
@@ -46,6 +46,8 @@ Page({
         })
         return
     }
+    const userInfo = wx.getStorageSync('userInfo')
+    const openId = wx.getStorageSync('openId') || ''
     wx.showLoading({
         title: '发表中...',
         mask: true
@@ -60,13 +62,18 @@ Page({
         wx.cloud.callFunction({
             name: 'quickstartFunctions',
             data: {
-                type: 'sendBlog',
+                type: 'updateBlog',
+                updateType: 'add',
                 content: this.data.content,
-                images: res
+                images: res,
+                openId,
+                nickName: userInfo.nickName,
+                avatarUrl: userInfo.avatarUrl
             }
         }).then(_res => {
+            console.log('写入数据库===> ', _res);
             wx.hideLoading()
-            wx.navigateTo({
+            wx.switchTab({
                 url: '../blog/blog',
             })
             this.setData({

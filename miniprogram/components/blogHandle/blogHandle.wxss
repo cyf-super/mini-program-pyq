@@ -1,0 +1,51 @@
+/* components/blogHandle/blogHandle.wxss */
+.blog-info {
+    display: flex;
+    justify-content: space-between;
+    height: 51rpx;
+    margin: 10rpx;
+    margin-left: 105rpx;
+}
+
+.blog-time {
+    color: rgb(187, 179, 179);
+    font-size: 24rpx;
+}
+
+.blog-handle {
+    display: flex;
+    align-items: center;
+}
+
+.mask {
+    display: flex;
+    justify-content: space-around;
+    /* align-items: center; */
+    width: 260rpx;
+    height: 50rpx;
+    margin-right: 6rpx;
+    border-radius: 5rpx;
+    color: #fff;
+    background-color: rgb(83, 83, 83);
+}
+
+.mask-text {
+    scale: 0.7;
+    display: inline-block;
+    vertical-align: middle;
+}
+.icon {
+    width: 35rpx;
+    vertical-align: middle;
+}
+
+.omit {
+    width: 50rpx;
+    height: 30rpx;
+    line-height: 28rpx;
+    text-align: center;
+    font-size: 26rpx;
+    background-color: #ececec;
+    border-radius: 6rpx;
+    color: var(--theme-color);
+}

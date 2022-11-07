@@ -1,17 +1,17 @@
 <!--components/blogImgText/blogImgText.wxml-->
 <view class="blog-section">
     <view class="blog-left">
-        <image class="person-img" src="{{userInfo.img}}"></image>
+        <image class="person-img" src="{{blogInfo.avatarUrl}}"></image>
     </view>
     <view class="blog-right">
         <view class="blog-name">
-            <text>{{ userInfo.name }}</text>
+            <text>{{ blogInfo.nickName }}</text>
         </view>
-        <view class="blog-content">
-            {{ blog.content }}
+        <view class="blog-content" bindlongpress="handleBlog" data-blog-info="{{ blogInfo }}">
+            {{ blogInfo.content }}
         </view>
         <view class="img-grid">
-            <image mode='widthFix' class="img-item {{ blog.images.length === 4 ?'img-item-four' : '' }}"  wx:for="{{blog.images}}" wx:key="id" src="{{item}}"></image>
+            <image mode='widthFix' class="img-item {{ blogInfo.images.length === 4 ?'img-item-four' : '' }}"  wx:for="{{blogInfo.images}}" wx:key="id" src="{{item.tempFilePath}}"></image>
         </view>
     </view>
 </view>
