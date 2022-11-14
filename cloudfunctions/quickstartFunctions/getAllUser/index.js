@@ -9,7 +9,6 @@ const db = cloud.database()
 exports.main = async () => {
     try {
         const users = await db.collection('users').get()
-        console.log('users--> ', users);
         return users.data || []
     } catch (error) {
         return error

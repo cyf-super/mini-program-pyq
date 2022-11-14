@@ -12,10 +12,6 @@
     object-fit: cover;
 }
 
-.blog-right {
-    
-}
-
 .img-grid {
     display: flex;
     flex-wrap: wrap;
@@ -56,5 +52,3 @@
 .img-item-four:nth-child(2n) {
     margin-right: 40rpx;
 }
-
-

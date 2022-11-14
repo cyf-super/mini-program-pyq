@@ -53,10 +53,10 @@ Component({
         return formatDate(properties.blogTime)
     },
     starName(data) {
+        console.log('data.openName----> ', data.openName);
         const map = data.blogStars.reduce((nameArr, openId) => 
             (nameArr.push(data.openName[openId]), nameArr)
         , [])
-        console.log('map ', map);
         return map
     },
     blogCommentArr(data) {
@@ -65,8 +65,10 @@ Component({
             comment.targetName = data.openName[comment.targetId]
             return (nameArr.push(comment), nameArr)
         }, [])
-        console.log('blogCommentArr ', map);
         return map
+    },
+    heartIcon(data) {
+        return data.blogStars.some(starId => starId === data.openId) ? 'https://caiyf.oss-cn-shenzhen.aliyuncs.com/non-mainstream/icons/heart-filled.svg' : 'https://caiyf.oss-cn-shenzhen.aliyuncs.com/non-mainstream/icons/heart.svg'
     }
   }, 
 
@@ -75,21 +77,17 @@ Component({
    */
   methods: {
     showMask(e) {
-        console.log(1111);
         this.setData({
             isShowMask: !this.data.isShowMask
         })
-      console.log(e);
     },
     clickComment() {
-        console.log(this.properties._id);
         const detail = {
             _id: this.properties._id,
         }
         this.triggerEvent('clickComment', detail)
     },
     clickStar() {
-        console.log(this.properties._id, this.properties.blogStars, this.data.openId);
         const index = this.properties.blogStars.findIndex(openId => openId === this.data.openId)
 
         const detail = {
@@ -98,15 +96,11 @@ Component({
         }
         this.triggerEvent('clickStar', detail)
     },
-    getOpenName(openId) {
-        console.log('openId==> ', openId);
-        return '123'
-    },
 
     // 点击评论回复
     replyComment(e) {
         const { commentId, openId, targetId, targetName } = e.currentTarget.dataset
-        console.log('e ', commentId, targetId, openId);
+
         const detail = {
             commentId,
             _id: this.properties._id,
@@ -118,10 +112,9 @@ Component({
 
     handleComment(e) {
         const { commentId, openId, targetId, targetName } = e.currentTarget.dataset
-        const { x, y } = e.detail
-        console.log('长按事件---> ', e);
-        // if (openId === this.data.openId) return
+        if (openId !== this.data.openId) return
 
+        const { x, y } = e.detail
         const detail = {
             commentId,
             _id: this.properties._id,
@@ -138,6 +131,11 @@ Component({
         this.setData({
             showInput: false
         })
-    }
     },
+    hideIcon() {
+        this.setData({
+            isShowMask: false
+        })
+    }
+  },
 })

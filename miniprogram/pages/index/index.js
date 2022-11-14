@@ -1,6 +1,7 @@
 // pages/index/index.js
 import { createStoreBindings } from 'mobx-miniprogram-bindings'
 import { store } from '../../store/store'
+import { personArr } from './map'
 
 Page({
 
@@ -8,7 +9,8 @@ Page({
    * 页面的初始数据
    */
   data: {
-
+    personArr,
+    imgalist: personArr.map(item => item.src)
   },
 
   getAllUserInfo: async function() {
@@ -19,7 +21,15 @@ Page({
         }
     })
     users.result.forEach(user => {
-        this.buttonTap(user.openId, user.userName)
+        this.buttonTap(user.openId, user.nickName)
+    })
+  },
+
+  previewImage(e) {
+    const current=e.target.dataset.src
+    wx.previewImage({
+        current: current, // 当前显示图片的http链接
+        urls: this.data.imgalist // 需要预览的图片http链接列表
     })
   },
 
@@ -34,8 +44,6 @@ Page({
             buttonTap: "updateOpenName", 
         }
     });
-
-    this.getAllUserInfo()
   },
 
   /**
@@ -49,6 +57,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow() {
+    this.getAllUserInfo()
 
   },
 

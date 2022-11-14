@@ -10,10 +10,8 @@ exports.main = async (event, context) => {
         cloudPath: path,
         fileContent: new Buffer.from(file, 'base64')
     }).then(res => {
-        console.log(res);
         return res
     }).catch(err => {
-        console.log(err);
         err.msg = '上传失败'
         return err
     })

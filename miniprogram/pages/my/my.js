@@ -3,78 +3,61 @@ import{ createStoreBindings }from'mobx-miniprogram-bindings'
 import { store } from '../../store/store'
 
 Page({
-
   /**
    * 页面的初始数据
    */
   data: {
     isLogin: false,
     userInfo: {
-        name: '',
-        avatarUrl: '',
-        openId: ''
-    }
+        nickName: wx.getStorageSync('nickName')?.nickName || '',
+        avatarUrl: wx.getStorageSync('avatarUrl')?.avatarUrl || '',
+        openId: wx.getStorageSync('openId') || '',
+    },
+    avatarUrl: 'https://mmbiz.qpic.cn/mmbiz/icTdbqWNOwNRna42FI242Lcia07jQodd2FJGIYQfG0LAJGFxM4FbnQP6yfMxBgJ0F3YRqJCJ1aPAK2dQagdusBZg/0'
+  },
+
+  onChooseAvatar(e) {
+    const { avatarUrl } = e.detail 
+    this.setData({
+        'userInfo.avatarUrl': avatarUrl
+    })
+    wx.setStorageSync('userInfo', this.data.userInfo)
+    this.setUserInfo(wx.getStorageSync('openId'), this.data.userInfo.nickName, avatarUrl)
+  },
+
+  bindInputMsg(e) {
+    console.log( e.detail.value);
+    this.setData({
+        'userInfo.nickName': e.detail.value
+    })
+    // 存储到store中
+    this.updateOpenName(this.data.userInfo.openId, e.detail.value)
+    wx.setStorageSync('userInfo', this.data.userInfo)
+    this.setUserInfo(wx.getStorageSync('openId'), e.detail.value, this.data.userInfo.avatarUrl)
   },
 
   getStorageInfo() {
     const userInfo = wx.getStorageSync('userInfo')
     if (!userInfo) return
     this.setData({
-        'userInfo.name': userInfo.nickName,
+        'userInfo.nickName': userInfo.nickName,
         'userInfo.avatarUrl': userInfo.avatarUrl,
         'userInfo.openId': wx.getStorageSync('openId'),
         isLogin: true
     })
   },
 
-  login(e) {
-      wx.getUserProfile({
-        desc: '用户完善会员资料',
+  setUserInfo(openId, nickName, avatarUrl) {
+    wx.cloud.callFunction({
+        name: 'quickstartFunctions',
+        data: {
+            type: 'userInfo',
+            openId,
+            nickName,
+            avatarUrl
+        },
     }).then(res => {
-        this.setData({
-            'userInfo.name': res.userInfo.nickName,
-            'userInfo.avatarUrl': res.userInfo.avatarUrl,
-            isLogin: true
-        })
-        wx.setStorageSync('userInfo', res.userInfo)
-        wx.cloud.callFunction({
-            name: 'quickstartFunctions',
-            data: {
-                type: 'login'
-            }
-        }).then(curUser => {
-            this.setData({
-                'userInfo.openId': curUser.result.openId
-            })
-            wx.setStorageSync('openId', curUser.result.openId)
-            const user = {
-                gender: res.userInfo.gender,
-                userName: res.userInfo.nickName,
-                avatarUrl: res.userInfo.avatarUrl,
-                openId: curUser.result.openId
-            }
-            this.setUserInfo(user)
-            // 存储到store中
-            this.updateOpenName(curUser.result.openId, res.userInfo.nickName)
-        })
-    })
-  },
-
-  setUserInfo(user) {
-    console.log('user----> ', user);
-    wx.cloud.database().collection('users').where({
-        openId: user.openId
-    }).get().then(res => {
-        if (res.data.length) return 
-        wx.cloud.callFunction({
-            name: 'quickstartFunctions',
-            data: {
-                type: 'userInfo',
-                ...user
-            },
-        }).then(res => {
-            console.log('添加数据成功');
-        })
+        console.log('添加数据成功');
     })
   },
 
@@ -82,9 +65,8 @@ Page({
       const userInfo = wx.getStorageSync('userInfo')
 
       if (userInfo) {
-          const openId = wx.getStorageSync('openId')
           this.setData({
-            'userInfo.name': userInfo.nickName,
+            'userInfo.nickName': userInfo.nickName,
             'userInfo.avatarUrl': userInfo.avatarUrl,
             isLogin: true
           })
@@ -104,6 +86,20 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad(options) {
+      const that = this
+    wx.login({
+        success (res) {
+          if (res.code && !wx.getStorageSync('openId')) {
+            wx.setStorageSync('openId', res.code)
+            that.setData({
+                'userInfo.openId': res.code
+            })
+          } else {
+            console.log('登录失败！' + res.errMsg)
+          }
+        }
+      })
+    
     this.getStorageInfo()
 
     this.storeBindings = createStoreBindings(this, {
@@ -124,7 +120,11 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow() {
-
+    this.setData({
+        'userInfo.nickName': wx.getStorageSync('userInfo')?.nickName || '',
+        'userInfo.avatarUrl': wx.getStorageSync('userInfo')?.avatarUrl || '',
+        'userInfo.openId': wx.getStorageSync('openId')?.nickName || ''
+    })
   },
 
   /**

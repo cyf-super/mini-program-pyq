@@ -8,13 +8,10 @@ Page({
    */
   data: {
     content: '',
-    imgArr: [
-        
-    ]
+    imgArr: []
   },
 
   bindTextAreaBlur(e) {
-      console.log(e.detail.value);
       this.setData({
           content: e.detail.value
       })
@@ -27,7 +24,6 @@ Page({
         sourceType: ['album', 'camera'],
         maxDuration: 30,
         success: (res) => {
-            console.log('res---> ', res);
             this.setData({
                 imgArr: [...this.data.imgArr, ...res.tempFiles]
             })
@@ -58,7 +54,6 @@ Page({
         uploadAsyncQueue.push(this.uploadImg(image.tempFilePath))
     }
     Promise.all(uploadAsyncQueue).then(res => {
-        console.log('上传完成---> ', res);
         wx.cloud.callFunction({
             name: 'quickstartFunctions',
             data: {
@@ -71,10 +66,14 @@ Page({
                 avatarUrl: userInfo.avatarUrl
             }
         }).then(_res => {
-            console.log('写入数据库===> ', _res);
             wx.hideLoading()
             wx.switchTab({
                 url: '../blog/blog',
+                success: function (res) {
+                    var page = getCurrentPages().pop();  
+                    if (page == undefined || page == null) return;  
+                    page.onLoad();
+                  }
             })
             this.setData({
                 content: '',
@@ -90,10 +89,8 @@ Page({
     return new Promise(async (resolve, rejetc) => {
         try {
             const res = await uploadImage(tempFilePath, 'non-mainstream/friend-circle/')    
-            console.log('上传成功---> ', res);
             resolve({tempFilePath :res})
         } catch (err) {
-            console.log('上传失败---> ', err);
             rejetc(err)
         }
     })
@@ -148,6 +145,15 @@ Page({
           imgArr: [],
           content: ''
       })
+  },
+
+  previewImage(e) {
+    const current = e.target.dataset.src
+    const images = this.data.imgArr.map(item => item.tempFilePath) 
+    wx.previewImage({
+        current: current, // 当前显示图片的http链接
+        urls: images // 需要预览的图片http链接列表
+    })
   },
 
   /**

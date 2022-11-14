@@ -7,24 +7,34 @@ cloud.init({
 const db = cloud.database()
 
 exports.main = async (event, context) => {
-    console.log('event===> ', event);
+    const {openId, nickName, avatarUrl } = event
     try {
-        const res = await db.collection('users').where({
-            openId: event.openId
-        }).get()
-        if (res.data.length) return res
+        const request = await db.collection('users').where({
+            openId
+        })
+        const res = await request.get()
+        if (res.data.length) {
+            request.update({
+                data: {
+                    avatarUrl,
+                    nickName
+                }
+            })
+            return
+        }
         await db.collection('users').add({
             data: {
-                openId: event.openId,
-                userName: event.userName,
-                gender: event.gender,
-                avatarUrl: event.avatarUrl
+                openId: openId,
+                nickName: nickName,
+                avatarUrl: avatarUrl
             }
         })
         return {
-            event
+            data: await db.collection('users').where({
+                openId
+            }).get()
         }
     } catch (error) {
-        console.log(error);
+        return error
     }
 }

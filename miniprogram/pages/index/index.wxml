@@ -1,2 +1,66 @@
 <!--pages/index/index.wxml-->
-<text>pages/index/index.wxml</text>
+<view class="container-index">
+    <view class="backgroud">
+        <view class="section-img">
+            非主流小分队!
+        </view>
+    </view>
+
+    <view class="section">
+        <view class="section-title">Personal show</view>
+        <block wx:for="{{personArr}}" wx:key="id" wx:for-item="person">
+            <view class="person-item">
+                <view class="introduce-img">
+                    <view>
+                        <image class="img" mode="aspectFill" src="{{person.src}}" data-src="{{person.src}}" bindtap="previewImage"></image>
+                    </view>
+                    <view class="introduce">
+                        <view class="name">{{person.name}}</view>
+                        <view class="hobbies">{{person.hobbies}}</view>
+                    </view> 
+                </view>
+                <view class="info">
+                    <view class="title">
+                        <text class="higthLight">{{person.title}}</text>
+                    </view>
+                    <view wx:for="{{person.content}}" wx:key="id">{{ item.msg }}</view>
+                    <view class="eggs">
+                        <view wx:for="{{ person.eggs }}" wx:key="id">
+                            {{item}}
+                        </view>
+                    </view>
+                </view>
+            </view>
+        </block>
+    </view>
+
+    <view class="conclusion">
+        <view class="section-title">总结</view>
+        <view class="content">
+            <view>两整顿校园的老师</view>
+            <view>两社交悍匪</view>
+            <view>两男的</view>
+        </view>
+    </view>
+
+    <view class="footer">
+        <view class="main">
+            <view class="official">
+                <view>
+                    The future is more important than love, love is more rare than the
+                    future
+                </view>
+                <view class="chinese-word">"前途比爱情更重要，爱情比前途更难得"</view>
+                <view>
+                    but you will finally find that the right person will stand in your
+                    future
+                </view>
+                <view class="chinese-word">"但你最后会发现，对的人会站在你的前途里"</view>
+                <view class="cite">
+                    ——
+                    <text>鲁迅说的</text>
+                </view>
+            </view>
+        </view>
+    </view>
+</view>

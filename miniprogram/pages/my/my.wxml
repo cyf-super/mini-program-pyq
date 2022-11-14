@@ -2,7 +2,7 @@
 <!-- header -->
 <view class="login" >
     <view class="login_bg"></view>
-    <view class="login-head" wx:if="{{!isLogin}}" bindtap="login">
+    <!-- <view class="login-head" wx:if="{{!isLogin}}" bindtap="login">
         <view class="head-img">
             <image class="login-img" src="https://caiyf.oss-cn-shenzhen.aliyuncs.com/cyf/non-mainstream/login.jpg"></image>
         </view>
@@ -13,6 +13,35 @@
         <image class="login-img" src="{{userInfo.avatarUrl}}"></image>
         </view>
         <view class="login-name">{{ userInfo.name }}</view>
+    </view> -->
+
+    <view class="login-head">
+        <button class="avatar-wrapper" open-type="chooseAvatar" bind:chooseavatar="onChooseAvatar">
+        <view class="head-img">
+            <image class="avatar login-img" src="{{userInfo.avatarUrl}}"></image>
+        </view>
+        </button> 
+        <input type="nickname" class="weui-input " placeholder="请输入昵称" value="{{userInfo.nickName}}" bindblur='bindInputMsg' />
     </view>
 
+    <view class="use">
+        <view class="strong">如何使用：</view>
+        <view>1. 朋友圈功能需要登陆才能使用哦(即设置头像和昵称)，点击头像可上传头像</view>
+        <view>2. 长按可删除自己发的朋友圈/评论</view>
+        <view >
+            <image class="use-image" mode="widthFix" src="https://caiyf.oss-cn-shenzhen.aliyuncs.com/non-mainstream/icons/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20221113183257.png"></image>
+        </view>
+        <view class="attention">
+            <view class="strong">注：</view>
+            <view>
+                1. 该朋友圈与微信的朋友圈没有半毛钱关系哈；只是把它做成跟微信的朋友圈一摸一样而已，请放心吃用
+            </view>
+            <view>
+                2. 朋友圈暂时只能上传图片，视频还不行哈
+            </view>
+            <view>
+                3. 有任何不满意的地方或者出错(有可能会出错)，随时可提出来哈（哪怕颜色不好看或者需要增加功能）
+            </view>
+        </view>
+    </view>
 </view>

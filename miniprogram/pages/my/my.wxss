@@ -19,6 +19,7 @@
 .head-img {
     width: 150rpx;
     height: 150rpx;
+    margin: auto;
     border-radius: 50%;
     padding: 4px;
     border: 10rpx solid #fff;
@@ -30,7 +31,25 @@
     border-radius: 50%;
 }
 
+.weui-input {
+    text-align: center
+}
+
 .login-name {
     margin-top: 8rpx;
     /* font-size: 35rpx; */
+}
+
+.use {
+    padding: 40rpx;
+    line-height: 50rpx;
+}
+
+.use-image {
+    width: 400rpx;
+    margin: 30rpx;
+}
+
+.strong {
+    font-weight: 700;
 }

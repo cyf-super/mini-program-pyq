@@ -1,7 +1,9 @@
 {
   "usingComponents": {
     "blogImgText": "../../components/blogImgText/blogImgText",
-    "blogHandle": "../../components/blogHandle/blogHandle",
     "comment": "../../components/comment/comment"
-  }
+  },
+  "navigationBarTitleText": "属于非主流小分队的朋友圈",
+  "enablePullDownRefresh": true,
+  "backgroundTextStyle": "dark"
 }

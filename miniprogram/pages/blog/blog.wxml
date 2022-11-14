@@ -1,16 +1,16 @@
 <!--pages/blog/blog.wxml-->
-<view class="blog">
+<view class="blog" bindtap="hideIcon">
     <view class="blog-backgroud">
         <view>
             <button bindtap="editCircleFriend" class="btn sendBtn" size='mini'>发表</button>
         </view>
         <image class="blog-img" mode="widthFix" src="https://caiyf.oss-cn-shenzhen.aliyuncs.com/non-mainstream/backgroud.jpg"></image>
         <view class="person">
-            <text class="person-name">{{ userInfo.name }}</text>
-            <image class="person-logo" src="{{ userInfo.img }}"  ></image>
+            <text class="person-name">{{ userInfo.nickName }}</text>
+            <image class="person-logo" src="{{ userInfo.avatarUrl }}" data-src="{{userInfo.avatarUrl}}" bindtap="previewAvatar" ></image>
         </view>
     </view>
-    <view class="blog-container">
+    <view class="blog-container" wx:if="{{userInfo.nickName && userInfo.avatarUrl}}">
         <view class="blog-item" wx:for="{{ blogArr }}" wx:key="id">
             <blogImgText 
                 blog-info="{{item}}"

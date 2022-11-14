@@ -1,13 +1,17 @@
 // pages/blog/blog.js
 import { BOLG } from "../../configMap";
+import { createStoreBindings } from 'mobx-miniprogram-bindings'
+import { store } from '../../store/store'
+
+
 Page({
   /**
    * 页面的初始数据
    */
   data: {
-    userInfo: {
-        name: 'zxc',
-        img: 'https://caiyf.oss-cn-shenzhen.aliyuncs.com/non-mainstream/login.jpg'
+    userInfo: wx.getStorageSync('userInfo') || {
+        nickName: '',
+        avatarUrl: 'https://caiyf.oss-cn-shenzhen.aliyuncs.com/non-mainstream/login.jpg'
     },
     blogArr: [],
     openId: wx.getStorageSync('openId'),
@@ -32,21 +36,27 @@ Page({
   },
 
   getBlog() {
-    console.log(111);
     wx.cloud.callFunction({
         name: 'quickstartFunctions',
         data: {
             type: 'getBlog'
         }
     }).then(res => {
-        console.log('获取朋友圈信息----> ', res);
         this.setData({
             blogArr: res.result.data
         })
+        wx.stopPullDownRefresh()
     })
   },
 
   editCircleFriend() {
+      if (!wx.getStorageSync('userInfo')) {
+        wx.showToast({
+            title: '请先登陆哦',
+            icon:"error"
+        })
+        return
+      }
       wx.navigateTo({
         url: '../send/send',
       })
@@ -54,12 +64,9 @@ Page({
 
   // 点赞   
   clickStar(e) {
-    console.log('clickStar  ', e.detail);
     const { _id, hasStar } = e.detail
     const blogArr = this.data.blogArr
-    console.log('blogArr--> ', blogArr);
     for (let i = 0; i < blogArr.length; i++) {
-        console.log(blogArr[i]._id, _id);
         if (blogArr[i]._id === _id) {
             if (!hasStar) {
                 blogArr[i].stars.push(this.data.openId)
@@ -70,7 +77,6 @@ Page({
             this.setData({
                 [`blogArr[${i}].stars`]: blogArr[i].stars
             })
-            console.log('blogArr[i].stars==> ', blogArr[i].stars);
             wx.cloud.callFunction({
                 name: 'quickstartFunctions',
                 data: {
@@ -87,7 +93,6 @@ Page({
   // 新增评论
   addComment(e) {
     const { _id } = e.detail
-    console.log('clickComment  ', _id);
     this.setData({
         showInput: true,
         currentBlogId: _id,
@@ -134,7 +139,6 @@ Page({
             handleType
         }
     }).then(res => {
-        console.log('res---> ', res);
         const { blogArr } = this.data
         for (let i = 0; i < blogArr.length; i++) {
             if (blogArr[i]._id === currentBlogId) {
@@ -143,7 +147,6 @@ Page({
                 })
             }
         }
-        console.log('更新博文---> ', this.data.blogArr);
     }).catch(err => {
         console.log('报错 ', err);
     })
@@ -163,7 +166,6 @@ Page({
         'commentInfo.commentId': commentId,
         currentBlogId: _id
     })
-    console.log(offset, this.data.style);
   },
 
     // 删除博客
@@ -256,11 +258,55 @@ Page({
       showInput: false
     })
   },
+
+  hideIcon() {
+      this.setData({
+          'deleteInfo.showDelete': false
+      })
+  },
+  previewAvatar(e) {
+    const current = e.target.dataset.src
+    wx.previewImage({
+        current: current, // 当前显示图片的http链接
+        urls: [current] 
+    })
+  },
+
+  getUserInfo() {
+    this.setData({
+        userInfo: wx.getStorageSync('userInfo') || {
+            nickName: '',
+            avatarUrl: 'https://caiyf.oss-cn-shenzhen.aliyuncs.com/non-mainstream/login.jpg'
+        },
+        openId: wx.getStorageSync('openId') || ''
+    })
+  },
+
+  getAllUserInfo: async function() {
+    const users = await wx.cloud.callFunction({
+        name: 'quickstartFunctions',
+        data: {
+            type: 'getAllUser'
+        }
+    })
+    users.result.forEach(user => {
+        this.buttonTap(user.openId, user.nickName)
+    })
+  },
+
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad(options) {
     this.getBlog()
+
+    this.storeBindings = createStoreBindings(this, {
+        store,
+        fields: ['openName'],
+        actions: {
+            buttonTap: "updateOpenName", 
+        }
+    });
   },
 
   /**
@@ -274,7 +320,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow() {
-
+    this.getUserInfo()
   },
 
   /**
@@ -295,7 +341,7 @@ Page({
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh() {
-
+    this.getBlog()
   },
 
   /**

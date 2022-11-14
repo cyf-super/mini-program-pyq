@@ -28,7 +28,7 @@ Component({
    * 组件的初始数据
    */
   data: {
-
+    openId: wx.getStorageSync('openId') || ''
   },
 
   /**
@@ -36,9 +36,9 @@ Component({
    */
   methods: {
     handleBlog(e) {
-        const { commentId, openId, targetId, targetName } = e.currentTarget.dataset
+        const { blogInfo } = e.currentTarget.dataset
+        if (blogInfo.openId !== this.data.openId) return
         const { x, y } = e.detail
-        // if (openId === this.data.openId) return
 
         const detail = {
             _id: this.properties.blogInfo._id,
@@ -47,8 +47,31 @@ Component({
                 y
             }
         }
-        console.log(1111, detail);
         this.triggerEvent('handleBlog', detail)
+    },
+    previewImage(e) {
+        const current = e.target.dataset.src
+        const images = this.data.blogInfo.images.map(item => item.tempFilePath) 
+        wx.previewImage({
+            current: current, // 当前显示图片的http链接
+            urls: images // 需要预览的图片http链接列表
+        })
+    },
+    previewAvatar(e) {
+        const current = e.target.dataset.src
+        wx.previewImage({
+            current: current, // 当前显示图片的http链接
+            urls: [current] 
+        })
+    },
+  },
+
+  lifetimes: {
+    attached: function() {
+        console.log('小程序进图页面  ', wx.getStorageSync('openId'));
+        this.setData({
+            openId: wx.getStorageSync('openId') || ''
+        })
     }
   }
 })

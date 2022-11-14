@@ -1,1 +1,213 @@
-/* pages/index/index.wxss */
+.backgroud {
+    background: black;
+    color: #fff;
+    width: 100%;
+    height: 400rpx;
+    display: flex;
+    align-items: center;
+}
+
+.section-img {
+    font: bold 200% Consolas, Monaco, monospace;
+    border-right: 0.1em solid;
+    /* width: 100rpx; */
+    width: 13ch;
+    margin: auto;
+    white-space: nowrap;
+    overflow: hidden;
+    animation: typing 3s steps(15, end),
+        cursor-blink 0.3s step-end infinite alternate;
+}
+
+@keyframes typing {
+    from {
+        width: 0;
+    }
+}
+
+@keyframes cursor-blink {
+    50% {
+        border-color: transparent;
+    }
+}
+
+.section, .conclusion {
+    margin: 40rpx 50rpx 40rpx;
+    /* margin: 100rpx 20rpx 150rpx 20rpx; */
+
+}
+
+.section-title {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 40rpx;
+    font-size: 50rpx;
+    font-style: italic;
+    font-weight: 700;
+}
+
+.person-item {
+    position: relative;
+    margin: 100rpx 0 150rpx 0;
+}
+
+.person-item:last-child {
+    margin-bottom: 80rpx;
+}
+
+.person-item::before {
+    content: '';
+    width: 100%;
+    height: 5rpx;
+    background-color: rgb(203, 208, 255);
+    position: absolute;
+    top: -70rpx;
+    left: 50%;
+    transform: translateX(-50%);
+    box-shadow: 0 0 8px rgba(67, 82, 214, 0.8);
+    /* filter: drop-shadow(5px 4px 2px rgba(1, 0, 50, 0.5)); */
+    
+}
+
+.introduce-img {
+    display: flex;
+    justify-content: end;
+    width: 100%;
+    border-radius: 15rpx;
+}
+
+.img {
+    width: 200rpx;
+    height: 200rpx;
+    object-fit: cover;
+    border-radius: 15rpx;
+}
+
+.introduce {
+    width: 100%;
+    margin-left: 50rpx;
+    margin-top: 10rpx;
+}
+
+.name {
+    letter-spacing: 5x;
+    font-style: italic;
+    font-size: 40rpx;
+    color: var(--theme-color);
+    font-weight: 600;
+}
+
+.introduce .hobbies {
+    margin-top: 20rpx;
+}
+
+.title {
+    margin-top: 20rpx;
+}
+
+.info view {
+    line-height: 50rpx;
+    margin-top: 10rpx;
+}
+
+.text-indent {
+    text-indent: -40rpx;
+    margin-left: 40rpx;
+}
+
+.higthLight {
+    color: var(--theme-color);
+    font-style: italic;
+}
+
+.eggs {
+    border: 3rpx solid #fdf900;
+    border-radius: 15rpx;
+    padding: 10rpx;
+    padding-left: 20rpx;
+    background-color: #FEE5AA;
+    font-size: 25rpx;
+    color: rgb(63, 63, 63);
+    text-indent: 0rpx !important;
+    margin-left: 0rpx !important;
+}
+
+.eggs view {
+    line-height: 30rpx;
+    text-indent: 0rpx;
+    margin-left: 0rpx;
+}
+.eggs view:last-child {
+    line-height: 30rpx;
+    margin: 15rpx 0 10rpx;
+}
+
+/* 总结 */
+.conclusion .content {
+    box-sizing: border-box;
+    width: 100%;
+    background-color: rgb(181, 210, 253);
+    padding: 20rpx;
+    padding-right: 0;
+    border-radius: 15rpx;
+    line-height: 45rpx;
+    box-shadow: 0 0 6px rgba(180,160,120,.8);
+    margin-bottom: 30rpx;  
+}
+
+.main {
+    max-width: 100%;
+    margin: auto;
+    padding: 59rpx 29rpx;
+    /* border-radius: 0.3em; */
+    text-shadow: 0 1px 1px hsla(0, 0%, 100%, 0.3);
+    box-shadow: 0 0 0 1px hsla(0, 0%, 100%, 0.3) inset,
+      0 0.3em 1em rgba(0, 0, 0, 0.22);
+    font: 30rpx Baskerville, Palatino, serif;
+  }
+  .main {
+    background: url('https://caiyf.oss-cn-shenzhen.aliyuncs.com/cyf/non-mainstream/background/6.jpg')
+      fixed 0 / cover;
+  }
+  .official::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: -1;
+    filter: blur(10px);
+    border-radius: 20rpx;
+    /* margin: -30px; */
+  }
+  .main .official {
+    font-style: italic;
+    color: #000;
+    padding: 30rpx;
+    hyphens: auto;
+    background: hsla(0, 0%, 100%, 0.6);
+    overflow: hidden;
+    position: relative;
+  }
+  .main .official .cite {
+    font-style: normal;
+    position: relative;
+    bottom: 0;
+    left: 70%;
+  }
+  .main footer {
+    text-align: right;
+  }
+  
+  .main .official p {
+    /* margin-left: 80px; */
+  }
+  .main .official footer
+     {
+      margin-right: 40px;
+  }
+
+  .chinese-word {
+      margin-bottom: 20rpx;
+  }

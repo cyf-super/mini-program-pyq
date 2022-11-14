@@ -1,20 +1,20 @@
 <!--components/comment/comment.wxml-->
 <!-- <wxs src="./comment.wxs" module="m1"></wxs> -->
-<view class="blog-info">
+<view class="blog-info" bindtap="hideIcon">
     <view class="blog-time">{{blogDate}}</view>
     <!-- 点赞、评论 -->
     <view class="blog-handle">
         <view class="mask" wx:if="{{isShowMask}}">
             <view class="mask-item" bindtap="clickStar">
-                <image class="icon" mode="widthFix" src="../../static/icons/heart.svg"></image>
+                <image class="icon" mode="widthFix" src="{{heartIcon}}"></image>
                 <text class="mask-text">赞</text>
             </view>
             <view class="mask-item" bindtap="clickComment">
-                <image class="icon" mode="widthFix" src="../../static/icons/comment.svg"></image>
+                <image class="icon" mode="widthFix" src="https://caiyf.oss-cn-shenzhen.aliyuncs.com/non-mainstream/icons/comment.svg"></image>
                 <text class="mask-text">评论</text>
             </view>
         </view>
-        <view class="omit" bindtap="showMask">••</view>
+        <view class="omit" catchtap="showMask">••</view>
     </view>
 </view>
 
@@ -22,7 +22,7 @@
 <view class="blog-comment" wx:if="{{starName.length || blogCommentArr.length}}" >
     <!-- 点赞 -->
     <view class="star" wx:if="{{starName.length}}">
-        <image mode="widthFix" class="icon" src="../../static/icons/heart-green.svg"></image>
+        <image mode="widthFix" class="icon" src="https://caiyf.oss-cn-shenzhen.aliyuncs.com/non-mainstream/icons/heart-green.svg"></image>
         <view class="star-name" wx:for="{{starName}}" wx:key="id" wx:for-item="openId">
             {{ openId }}
         </view>

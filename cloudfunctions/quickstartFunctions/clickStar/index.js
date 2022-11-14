@@ -15,10 +15,6 @@ exports.main = async (event, context) => {
             stars
         }
     })
-    console.log('1111111 ', await db.collection('circle_friends').where({
-        _id
-    }));
-    console.log('_id, stars res===> ', res, _id, stars);
     return {
         res,
         event

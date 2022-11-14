@@ -1,10 +1,10 @@
 <!--pages/send/index.wxml-->
 <view class="send">
     <view class="text-section">
-        <textarea class="textarea" auto-focus auto-height placeholder="说什么吧" bindblur="bindTextAreaBlur" />
+        <textarea class="textarea" auto-focus auto-height placeholder="说什么吧" bindblur="bindTextAreaBlur" bindinput="bindinput" />
     </view>
     <view class="img-section">
-        <image class="image-item" wx:for="{{imgArr}}" src="{{item.tempFilePath}}" wx:key="id"></image>
+        <image class="image-item" wx:for="{{imgArr}}" src="{{item.tempFilePath}}" wx:key="id" data-src="{{item.tempFilePath}}" bindtap="previewImage"></image>
         <view wx:if="{{ imgArr.length < 9}}" class="update-Img" bindtap="updateImg">+</view>
     </view>
     <view class="btn-section">

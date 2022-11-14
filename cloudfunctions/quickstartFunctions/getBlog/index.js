@@ -8,13 +8,11 @@ const db = cloud.database()
 
 exports.main = async () => {
     try {
-        const res = await db.collection('circle_friends').get()
+        const res = await db.collection('circle_friends').orderBy('timer','desc').get()
         const count = await db.collection('circle_friends').count()
-        console.log('res===> ', res);
         res.count = count
         return res
     } catch(err) {
-        console.log('err===> ', );
         return err
     }
 }

@@ -33,8 +33,6 @@ exports.main = async (event) => {
                     })
                 }
             })
-
-            console.log('删除成功', data);
             return data
         }
         
@@ -49,9 +47,7 @@ exports.main = async (event) => {
                     'comment.$.timer': timer
                 }
             })
-            console.log('data  ', data, commentId, message, timer);
             data.message = '更新成功'
-            console.log('更新成功 ', data);
             return res
         }
 
