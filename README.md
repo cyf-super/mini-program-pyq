@@ -8,6 +8,5 @@
 
 ## 效果
 
-- [首页](./miniprogram/images/friend.png)
-- [朋友圈](./miniprogram/images/blob.png)
+![首页](./miniprogram/images/friend.png)  ![朋友圈](./miniprogram/images/blob.png)
 
