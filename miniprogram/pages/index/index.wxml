@@ -2,7 +2,7 @@
 <view class="container-index">
     <view class="backgroud">
         <view class="section-img">
-            非主流小分队!
+            都是我的朋友啊!
         </view>
     </view>
 
@@ -32,15 +32,6 @@
                 </view>
             </view>
         </block>
-    </view>
-
-    <view class="conclusion">
-        <view class="section-title">总结</view>
-        <view class="content">
-            <view>两整顿校园的老师</view>
-            <view>两社交悍匪</view>
-            <view>两男的</view>
-        </view>
     </view>
 
     <view class="footer">
