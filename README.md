@@ -7,6 +7,9 @@
 - 需要填写oss的相关信息：AccessKeySecret、AccessKeyId等
 
 ## 效果
+#### 首页
+![首页](./miniprogram/images/friend.png)
 
-![首页](./miniprogram/images/friend.png)  ![朋友圈](./miniprogram/images/blob.png)
+#### 朋友圈页面
+![朋友圈](./miniprogram/images/blob.png)
 
