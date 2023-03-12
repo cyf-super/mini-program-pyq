@@ -11,5 +11,5 @@
 ![首页](./miniprogram/images/friend.png)
 
 #### 朋友圈页面
-![朋友圈](./miniprogram/images/blob.png)
+![朋友圈](./miniprogram/images/blog.png)
 
